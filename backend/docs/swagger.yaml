@@ -1,0 +1,176 @@
+basePath: /api
+definitions:
+  models.Blueprint:
+    properties:
+      created_at:
+        type: string
+      description:
+        type: string
+      id:
+        type: string
+      schema:
+        description: Stored as JSON string
+        type: string
+      title:
+        type: string
+    type: object
+  models.Contract:
+    properties:
+      blueprint:
+        $ref: '#/definitions/models.Blueprint'
+      blueprint_id:
+        type: string
+      created_at:
+        type: string
+      data:
+        description: Stored as JSON string
+        type: string
+      id:
+        type: string
+      status:
+        $ref: '#/definitions/models.ContractStatus'
+      updated_at:
+        type: string
+    type: object
+  models.ContractStatus:
+    enum:
+    - CREATED
+    - APPROVED
+    - SENT
+    - SIGNED
+    - LOCKED
+    - REVOKED
+    type: string
+    x-enum-varnames:
+    - StatusCreated
+    - StatusApproved
+    - StatusSent
+    - StatusSigned
+    - StatusLocked
+    - StatusRevoked
+host: localhost:8080
+info:
+  contact: {}
+  description: REST API for managing blueprints and contracts.
+  title: Contract Management Platform API
+  version: "1.0"
+paths:
+  /blueprints:
+    get:
+      description: Get a list of all contract blueprints
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Blueprint'
+            type: array
+      summary: List all blueprints
+      tags:
+      - blueprints
+    post:
+      consumes:
+      - application/json
+      description: Create a new contract blueprint with a schema
+      parameters:
+      - description: Blueprint JSON
+        in: body
+        name: blueprint
+        required: true
+        schema:
+          $ref: '#/definitions/models.Blueprint'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Blueprint'
+      summary: Create a blueprint
+      tags:
+      - blueprints
+  /contracts:
+    get:
+      description: Get a list of all contracts
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Contract'
+            type: array
+      summary: List all contracts
+      tags:
+      - contracts
+    post:
+      consumes:
+      - application/json
+      description: Create a new contract instance from a blueprint
+      parameters:
+      - description: Contract JSON
+        in: body
+        name: contract
+        required: true
+        schema:
+          $ref: '#/definitions/models.Contract'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Contract'
+      summary: Create a contract
+      tags:
+      - contracts
+  /contracts/{id}:
+    get:
+      description: Get contract details by ID
+      parameters:
+      - description: Contract ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Contract'
+      summary: Get a contract
+      tags:
+      - contracts
+  /contracts/{id}/status:
+    patch:
+      consumes:
+      - application/json
+      description: Transition contract status (e.g. APPROVED, SIGNED)
+      parameters:
+      - description: Contract ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: 'Status Object {status: string}'
+        in: body
+        name: status
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Contract'
+      summary: Update contract status
+      tags:
+      - contracts
+swagger: "2.0"
