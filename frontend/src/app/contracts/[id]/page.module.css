@@ -1,0 +1,163 @@
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid hsl(var(--border));
+}
+
+.meta {
+    margin-bottom: 0.5rem;
+}
+
+.label {
+    font-size: 0.8rem;
+    font-family: monospace;
+    color: hsl(var(--muted-foreground));
+    background: hsl(var(--secondary));
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.statusBadge {
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Status Colors used globally, defining specific ones here if needed override */
+.created { background: hsl(210, 100%, 96%); color: hsl(210, 100%, 40%); }
+.approved { background: hsl(150, 100%, 96%); color: hsl(150, 100%, 30%); }
+.sent { background: hsl(40, 100%, 96%); color: hsl(40, 100%, 40%); }
+.signed { background: hsl(262, 83%, 96%); color: hsl(262, 83%, 58%); }
+.locked { background: hsl(220, 14%, 96%); color: hsl(220, 14%, 40%); border: 1px solid hsl(220, 14%, 80%); }
+.revoked { background: hsl(0, 100%, 96%); color: hsl(0, 100%, 40%); }
+
+.content {
+  background: hsl(var(--background));
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  padding: 2rem;
+}
+
+.sectionTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 2rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.fieldLabel {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: hsl(var(--muted-foreground));
+  text-transform: uppercase;
+}
+
+.fieldValue {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.lifecycle {
+  background: hsl(var(--secondary) / 0.3);
+  padding: 2rem;
+  border-radius: var(--radius);
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius);
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: transform 0.1s;
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+.approveBtn {
+    composes: btn;
+    background: hsl(150, 60%, 45%);
+    color: white;
+}
+
+.sendBtn {
+    composes: btn;
+    background: hsl(40, 90%, 50%);
+    color: white;
+}
+
+.signBtn {
+    composes: btn;
+    background: hsl(var(--primary));
+    color: white;
+}
+
+.lockBtn {
+    composes: btn;
+    background: hsl(220, 20%, 30%);
+    color: white;
+}
+
+.revokeBtn {
+    composes: btn;
+    background: transparent;
+    border: 1px solid hsl(0, 84%, 60%);
+    color: hsl(0, 84%, 60%);
+    margin-left: auto;
+}
+
+.revokeBtn:hover {
+    background: hsl(0, 84%, 98%);
+}
+
+.finalState {
+    color: hsl(var(--muted-foreground));
+    font-style: italic;
+}
+
+.loading, .error {
+    text-align: center;
+    padding: 4rem;
+    color: hsl(var(--muted-foreground));
+}
