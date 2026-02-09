@@ -35,7 +35,7 @@ Designed for high performance, ease of use, and premium aesthetics.
 1. **Clone the repository**
    ```bash
    git clone https://github.com/Mastermind-sap/contract-management-system.git
-   cd cnear-assign
+   cd contract-management-system
    ```
 
 2. **Backend Setup**
